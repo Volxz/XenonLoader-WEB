@@ -19,7 +19,7 @@ class XFGroupMod extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['game_id','mod_id','xf_group_id'];
+    protected $fillable = ['mod_id','xf_group_id'];
     // protected $hidden = [];
     // protected $dates = [];
 
