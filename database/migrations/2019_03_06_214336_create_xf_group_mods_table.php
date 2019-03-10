@@ -15,10 +15,8 @@ class CreateXFGroupModsTable extends Migration
     {
         Schema::create('xf_group_mods', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('mod_id')->nullable()->unsigned();
+            $table->integer('mod_id')->unsigned();
             $table->foreign('mod_id')->references('id')->on('mods');
-            $table->integer('game_id')->nullable()->unsigned();
-            $table->foreign('game_id')->references('id')->on('games');
             $table->integer('xf_user_group_id');
             $table->timestamps();
         });
