@@ -44,10 +44,10 @@ Route::post('/test', function (Request $request) {
 })->middleware(EncryptedLoaderAPI::class, XFAuth::class);
 
 Route::post('/launcher/modlist', function (Request $request){
+    //Get individual mods assigned to the groups
     $xfUser = XFUser::where('username','=','sp3ctre')->with('xfgroups.mods.game')->get()->first();
     $availableMods = [];
     $groups = $xfUser->toArray()['xfgroups'];
-    //dd($groups);
     foreach($groups as $group)
     {
         foreach ($group['mods'] as $mod)
@@ -62,6 +62,7 @@ Route::post('/launcher/modlist', function (Request $request){
             $availableMods = array_unique(array_merge($availableMods,$mastertemp), SORT_REGULAR);
         }
     }
-     //dd($groups);
-    return $availableMods;
+    //
+
+    return response()->json($availableMods);
 })->middleware(XFAuth::class);
