@@ -13,7 +13,7 @@ class CreateGroupGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_games', function (Blueprint $table) {
+        Schema::create('xf_group_games', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('game_id')->unsigned();
             $table->foreign('game_id')->references('id')->on('games');
@@ -29,6 +29,6 @@ class CreateGroupGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_games');
+        Schema::dropIfExists('xf_group_games');
     }
 }
