@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "version": 6.9,
+    "secret": "SEX-SEXYTIME-MIKEISACUNT",
+    "name": "SEX DICK SUCKER",
+    "mod_file": null,
+    "game_id": 1,
+    "game": {
+      "id": 1,
+      "created_at": "2019-03-04 01:23:38",
+      "updated_at": "2019-03-04 01:23:38",
+      "name": "GTA V",
+      "executable": "gtav.exe"
+    }
+  },
+  {
+    "id": 2,
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "version": 1.5,
+    "secret": "awfeahg e4rwqa gse grseg sreg se g",
+    "name": "test",
+    "mod_file": "mods\/4f57de9f583d2f8a62a29934a964a074.dll",
+    "game_id": null,
+    "game": null
+  },
+  {
+    "id": 3,
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "version": 1.5,
+    "secret": "wesehg 54y 45h54j56jytjtyj",
+    "name": "test",
+    "mod_file": null,
+    "game_id": 1,
+    "game": {
+      "id": 1,
+      "created_at": "2019-03-04 01:23:38",
+      "updated_at": "2019-03-04 01:23:38",
+      "name": "GTA V",
+      "executable": "gtav.exe"
+    }
+  }
+]

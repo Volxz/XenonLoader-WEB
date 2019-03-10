@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreateModsTable extends Migration {
+
+	public function up()
+	{
+		Schema::create('mods', function(Blueprint $table) {
+            $table->engine = 'InnoDB';
+
+            $table->increments('id');
+			$table->softDeletes();
+			$table->double('version')->index()->unique();
+            $table->string('encryption_key_public');
+            $table->string('encryption_key_private');
+			$table->string('name');
+            $table->string('mod_file')->nullable();
+            $table->integer('game_id')->unsigned()->nullable();
+            $table->foreign('game_id')->references('id')->on('games');
+
+            $table->timestamps();
+
+        });
+	}
+
+	public function down()
+	{
+		Schema::drop('mods');
+	}
+}
