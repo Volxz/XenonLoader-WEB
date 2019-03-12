@@ -45,24 +45,38 @@ Route::post('/test', function (Request $request) {
 
 Route::post('/launcher/modlist', function (Request $request){
     //Get individual mods assigned to the groups
-    $xfUser = XFUser::where('username','=','sp3ctre')->with('xfgroups.mods.game')->get()->first();
+    $xfUser = XFUser::where('username','=',$request->get('user'))->with('xfgroups.mods.game','xfgroups.games.mods')->get()->first();
     $availableMods = [];
     $groups = $xfUser->toArray()['xfgroups'];
     foreach($groups as $group)
     {
         foreach ($group['mods'] as $mod)
         {
-            $mastertemp = [];
             $temparr = [];
             $temparr['id'] = $mod['id'];
             $temparr['version'] = $mod['version'];
             $temparr['name'] = $mod['name'];
             $temparr['game'] = $mod['game']['name'];
-            array_push($mastertemp, $temparr);
-            $availableMods = array_unique(array_merge($availableMods,$mastertemp), SORT_REGULAR);
+
+            array_push($availableMods,$temparr);
+        }
+
+        foreach ($group['games'] as $game)
+        {
+            foreach ($game['mods'] as $mod){
+                $temparr = [];
+                $temparr['id'] = $mod['id'];
+                $temparr['version'] = $mod['version'];
+                $temparr['name'] = $mod['name'];
+                $temparr['game'] = $game['name'];
+                array_push($availableMods,$temparr);
+            }
         }
     }
+
     //
 
-    return response()->json($availableMods);
-})->middleware(XFAuth::class);
+
+
+    return response()->json(array_map("unserialize", array_unique(array_map("serialize", $availableMods))));
+})->middleware(XFAuth::class); // TODO: Test in client and add encrypted channels
