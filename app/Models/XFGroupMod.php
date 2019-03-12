@@ -15,6 +15,7 @@ class XFGroupMod extends Model
     |--------------------------------------------------------------------------
     */
 
+    protected $connection = 'mysql';
     protected $table = 'xf_group_mods';
     protected $primaryKey = 'id';
     public $timestamps = false;
@@ -28,6 +29,7 @@ class XFGroupMod extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
 
     /*
     |--------------------------------------------------------------------------

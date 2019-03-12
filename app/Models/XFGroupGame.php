@@ -14,7 +14,7 @@ class XFGroupGame extends Model
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-
+    protected $connection = 'mysql';
     protected $table = 'xf_group_games';
     protected $primaryKey = 'id';
     public $timestamps = false;
