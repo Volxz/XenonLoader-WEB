@@ -9,12 +9,14 @@ class CreateGamesTable extends Migration {
 	{
 		Schema::create('games', function(Blueprint $table) {
             $table->engine = 'InnoDB';
-
             $table->increments('id');
-			$table->timestamps();
+            $table->softDeletes();
+
+            $table->timestamps();
 			$table->string('name');
 			$table->string('executable');
-		});
+
+        });
 	}
 
 	public function down()

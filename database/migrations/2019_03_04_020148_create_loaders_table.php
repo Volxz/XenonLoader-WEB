@@ -15,8 +15,8 @@ class CreateLoadersTable extends Migration
     {
         Schema::create('loaders', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
             $table->bigIncrements('id');
+            $table->softDeletes();
             $table->string('name');
             $table->double('version')->index()->unique();
             $table->string('encryption_key_public');

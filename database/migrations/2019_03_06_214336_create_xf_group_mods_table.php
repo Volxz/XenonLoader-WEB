@@ -16,8 +16,8 @@ class CreateXFGroupModsTable extends Migration
         Schema::create('xf_group_mods', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('mod_id')->unsigned();
-            $table->foreign('mod_id')->references('id')->on('mods');
-            $table->integer('xf_user_group_id');
+            $table->foreign('mod_id')->references('id')->on('mods')->onDelete('cascade')->onUpdate('cascade');;
+            $table->integer('xf_group_id');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateXFGroupModsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_mods');
+        Schema::dropIfExists('xf_group_mods');
     }
 }
