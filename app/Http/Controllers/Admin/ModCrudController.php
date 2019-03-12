@@ -46,6 +46,15 @@ class ModCrudController extends CrudController
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model' => "App\Models\Game", // foreign key model
         ]);
+        $this->crud->addColumn([       // Select2Multiple = n-n relationship (with pivot table)
+            'label' => "Groups",
+            'type' => 'select_multiple',
+            'name' => 'groups', // the method that defines the relationship in your Model
+            'entity' => 'groups', // the method that defines the relationship in your Model
+            'attribute' => 'title', // foreign key attribute that is shown to user
+            'model' => "App\\Models\\XFGroup", // foreign key model
+        ]);
+
 
 
         //$this->crud->setFromDb();
@@ -71,16 +80,21 @@ class ModCrudController extends CrudController
                 return $query->orderBy('name', 'ASC')->get();
             }), // force the related options to be a custom query, instead of all(); you can use this to filter the results show in the select
         ]);
-/*        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
+        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => "Groups",
             'type' => 'select2_multiple',
-            'name' => 'xfGroups', // the method that defines the relationship in your Model
-            'entity' => 'tags', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model' => "App\Models\Tag", // foreign key model
+            'name' => 'groups', // the method that defines the relationship in your Model
+            'entity' => 'groups', // the method that defines the relationship in your Model
+            'attribute' => 'title', // foreign key attribute that is shown to user
+            'model' => "App\\Models\\XFGroup", // foreign key model
             'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
             // 'select_all' => true, // show Select All and Clear buttons?
-        ]);*/
+
+            // optional
+            'options'   => (function ($query) {
+                return $query->orderBy('user_group_id', 'ASC')->get();
+            }), // force the related options to be a custom query, instead of all(); you can use this to filter the results show in the select
+        ]);
         $this->crud->addField([   // Upload
             'name' => 'encryption_key_public',
             'label' => 'Public Key File',
