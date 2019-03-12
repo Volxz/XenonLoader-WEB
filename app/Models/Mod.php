@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Mod extends Model
 {
     use CrudTrait;
+    use SoftDeletes;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,7 +21,7 @@ class Mod extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = [];
-    protected $fillable = ['version','secret','name', 'mod_file', 'encryption_key_public', 'encryption_key_private'];
+    protected $fillable = ['version', 'secret', 'name', 'mod_file', 'encryption_key_public', 'encryption_key_private'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -34,15 +36,16 @@ class Mod extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function game()
-    {
-        return $this->belongsTo(\App\Models\Game::class,"game_id", "id");
-    }
-
     public function groups()
     {
-        return $this->hasManyThrough(\App\Models\Mod::class,\App\Models\XFGroupMod::class);
+        return $this->belongsToMany(\App\Models\XFGroup::class, env('DB_DATABASE', 'xenonloader') . ".xf_group_mods", "mod_id", "xf_group_id", "id", "user_group_id");
     }
+
+    public function game()
+    {
+        return $this->belongsTo(\App\Models\Game::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
