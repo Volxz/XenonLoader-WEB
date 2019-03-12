@@ -15,12 +15,14 @@ class XFGroup extends Model
     ];
 
     public function mods()
-    {
-        return $this->hasManyThrough(\App\Models\Mod::class,\App\Models\XFGroupMod::class, "xf_user_group_id", "id");
+    {    //cols reversed
+        //return $this->hasManyThrough(\App\Models\Mod::class,\App\Models\XFGroupMod::class,"mod_id","id","user_group_id","user_group_id");
+        //                                                                                                        PIVOT KEY 1  | MODS TABLE ID |      DOESNT FAIL WTF WHY FML     |  PIVOT VALUE 2
+        return $this->hasManyThrough(\App\Models\Mod::class,\App\Models\XFGroupMod::class,"xf_group_id","id","user_group_id","mod_id");
     }
 
     public function games()
     {
-        return $this->hasManyThrough(\App\Models\Game::class,\App\Models\XFGroupGame::class, "xf_user_group_id", "id");
+        return $this->hasManyThrough(\App\Models\Game::class,\App\Models\XFGroupGame::class, "xf_group_id", "id","user_group_id","game_id");
     }
 }
