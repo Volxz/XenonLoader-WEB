@@ -21,8 +21,8 @@ class EncryptedLoaderAPI
         }
         $version = $request->header('loader_version');
         $loader = \App\Models\Loader::where('version', '=',$version)->get()->first();
-        if(!$loader){
-            abort(403);
+        if(!$loader || !$loader->enabled){ // If the loader doesnt exist or isnt enabled 403 them
+            abort(403); //TODO: setup custom abort codes so the client knows to update etc. Custom messages possibly?
         }
         $privateKeyLoc = $loader->encryption_key_private;
         $privateKey = Storage::get($privateKeyLoc);
