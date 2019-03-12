@@ -13,7 +13,7 @@ class CreateModsTable extends Migration {
             $table->increments('id');
             $table->softDeletes();
 
-            $table->double('version')->index()->unique();
+            $table->double('version');
             $table->string('encryption_key_public');
             $table->string('encryption_key_private');
 			$table->string('name');
