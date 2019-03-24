@@ -16,10 +16,11 @@ class XFAuth
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->has("user") || !$request->has("password")){
+        if(!$request->has("username") || !$request->has("password")){
             abort(403);
         }
-        $xfuser = XFUser::where("username", "=", $request->get("user"))->get()->first();
+
+        $xfuser = XFUser::where("username", "=", $request->get("username"))->get()->first();
         $correctPass = $xfuser->checkPassword($request->get("password"));
         if(!$correctPass) {
             abort(403);
