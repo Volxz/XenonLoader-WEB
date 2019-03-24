@@ -25,4 +25,9 @@ class XFGroup extends Model
     {
         return $this->hasManyThrough(\App\Models\Game::class,\App\Models\XFGroupGame::class, "xf_group_id", "id","user_group_id","game_id");
     }
+
+    public function users()
+    {
+        return $this->hasManyThrough(\App\Models\XFUser::class,\App\Models\XFGroupUser::class,  "user_group_id","user_id","user_group_id","user_id");
+    }
 }
