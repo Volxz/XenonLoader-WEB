@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLogsTable extends Migration
+class CreateBannedIpTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('logs', function (Blueprint $table) {
+        Schema::create('banned_ip', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('xf_user_id');
-            $table->ipAddress('client_ip');
-            $table->string('client_hwid');
-            $table->string('event_type');
-            $table->boolean('success');
+            $table->ipAddress('ip')->unique()->index();
+            $table->integer('attempts')->default(0);
+            $table->boolean('permanent')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logs');
+        Schema::dropIfExists('banned_ip');
     }
 }

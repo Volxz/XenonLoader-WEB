@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\BannedIP;
+
 /**
  * Format data to JSON then encrypt and B64 it then make it a JSON again (easy right?)
  * @param $data
@@ -16,3 +18,22 @@ function formatAndEncrypt($data, $request){
     return $response;
 }
 
+function ipBlocked($ip){
+    $dbip = BannedIP::firstOrCreate(['ip'=>$ip]);
+    if($dbip->attempts > 20){
+        return true;
+    }
+    return false;
+}
+
+
+function incrementFailedIP($ip){
+    $dbip = BannedIP::firstOrCreate(['ip'=>$ip]);
+    $dbip->increment('attempts', 1);
+}
+
+function clearFailedIP($ip){
+    $dbip = BannedIP::firstOrCreate(['ip'=>$ip]);
+    $dbip->attempts = 0;
+    $dbip->save();
+}

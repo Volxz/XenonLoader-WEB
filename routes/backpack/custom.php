@@ -14,4 +14,5 @@ Route::group([
     CRUD::resource('mod', 'ModCrudController');
     CRUD::resource('game', 'GameCrudController');
     CRUD::resource('loader', 'LoaderCrudController');
+    CRUD::resource('log', 'LogCrudController');
 }); // this should be the absolute last line of this file

@@ -16,13 +16,17 @@ class XFAuth
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->has("username") || !$request->has("password")){
+
+        if(ipBlocked($request->ip()) || !$request->has("username") || !$request->has("password")) {
+            incrementFailedIP($request->ip());
             abort(403);
         }
 
         $xfuser = XFUser::where("username", "=", $request->get("username"))->get()->first();
         $correctPass = $xfuser->checkPassword($request->get("password"));
         if(!$correctPass) {
+            incrementFailedIP($request->ip());
+
             abort(403);
         } else {
             return $next($request);
