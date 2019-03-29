@@ -16,8 +16,11 @@ class XFAuth
      */
     public function handle($request, Closure $next)
     {
-
-        if(ipBlocked($request->ip()) || !$request->has("username") || !$request->has("password")) {
+        if(ipBlocked($request->ip())){
+            incrementFailedIP($request->ip());
+            abort(429);
+        }
+        if(!$request->has("username") || !$request->has("password")) {
             incrementFailedIP($request->ip());
             abort(403);
         }
