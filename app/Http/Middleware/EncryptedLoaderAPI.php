@@ -27,7 +27,7 @@ class EncryptedLoaderAPI
             abort(403); // Loader is not in our DB so they are forbidden
         }
         if (!$loader->enabled) {
-            abort(401); // Loader is disabled so its officially a teapot
+            abort(401);
         }
 
         $privateKeyLoc = $loader->encryption_key_private;
