@@ -19,7 +19,7 @@ class BannedIP extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['ip','attempts'];
+    protected $fillable = ['ip','attempts','permanent'];
     // protected $hidden = [];
     // protected $dates = [];
 

@@ -15,4 +15,5 @@ Route::group([
     CRUD::resource('game', 'GameCrudController');
     CRUD::resource('loader', 'LoaderCrudController');
     CRUD::resource('log', 'LogCrudController');
+    CRUD::resource('bannedip', 'BannedIPCrudController');
 }); // this should be the absolute last line of this file
