@@ -95,21 +95,7 @@ class ModCrudController extends CrudController
                 return $query->orderBy('user_group_id', 'ASC')->get();
             }), // force the related options to be a custom query, instead of all(); you can use this to filter the results show in the select
         ]);
-        $this->crud->addField([   // Upload
-            'name' => 'encryption_key_public',
-            'label' => 'Public Key File',
-            'type' => 'upload',
-            'upload' => true,
-            'disk' => 'local' // if you store files in the /public folder, please ommit this; if you store them in /storage or S3, please specify it;
-        ]);
-        $this->crud->addField([   // Upload
-            'name' => 'encryption_key_private',
-            'label' => 'Private Key File',
-            'type' => 'upload',
-            'upload' => true,
-            'disk' => 'local' // if you store files in the /public folder, please ommit this; if you store them in /storage or S3, please specify it;
-        ]);
-
+        $this->crud->addField(['name' => 'secret', 'type' => 'text', 'label' => 'Mod Authentication Secret']);
 
         // add asterisk for fields that are required in ModRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');

@@ -14,8 +14,7 @@ class CreateModsTable extends Migration {
             $table->softDeletes();
 
             $table->double('version');
-            $table->string('encryption_key_public');
-            $table->string('encryption_key_private');
+            $table->string('secret');
 			$table->string('name');
             $table->string('mod_file')->nullable();
             $table->integer('game_id')->unsigned()->nullable();

@@ -21,7 +21,7 @@ class Mod extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = [];
-    protected $fillable = ['version', 'secret', 'name', 'mod_file', 'encryption_key_public', 'encryption_key_private'];
+    protected $fillable = ['version', 'secret', 'name', 'mod_file'];
     // protected $hidden = [];
     // protected $dates = [];
 
