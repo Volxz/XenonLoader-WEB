@@ -127,3 +127,59 @@ Route::post('/loader/downloadmod', function (Request $request) {
     return Response::download(storage_path("app/{$chosenMod->mod_file}"), 'inject.dll');
 
 })->middleware(EncryptedLoaderAPI::class, XFAuth::class);
+
+Route::post('/mod/authenticate', function (Request $request) {
+    //TODO:Add date verification +1 day -1 day
+    $mod = Mod::find((int) $request->header("Mod-Identifier"));
+
+    if(!$mod){
+        $response = Response::make("false" , 200);
+        $response->header('Content-Type', 'text/plain');
+        return $response;
+    }
+    $secret = $mod->secret;
+    $contents = $secret . $request->getContent() . $secret;
+    $localHash = hash('sha256', $contents);
+
+    if($request->header('Verification-Code') != $localHash){
+        $response = Response::make("false" , 200);
+        $response->header('Content-Type', 'text/plain');
+        return $response;
+    }
+    $xfuserfields = DB::connection('mysql2')->table('xf_user_field_value')
+        ->where('field_id', "=", "HWID")
+        ->where("field_value", "=", $request->get("hwid"))->first();
+    if (!$xfuserfields ||!$xfuserfields->user_id)
+    {
+        $response = Response::make("false" , 200);
+        $response->header('Content-Type', 'text/plain');
+        return $response;
+    }
+    $xfUser = XFUser::find($xfuserfields->user_id)->with('xfgroups.mods.game', 'xfgroups.games.mods')->get()->first();
+
+    $availableModsIDs = [];
+    $groups = $xfUser->toArray()['xfgroups'];
+    foreach ($groups as $group) {
+        foreach ($group['mods'] as $mod) {
+            array_push($availableModsIDs, $mod['id']);
+        }
+
+        foreach ($group['games'] as $game) {
+            foreach ($game['mods'] as $mod) {
+                array_push($availableModsIDs, $mod['id']);
+            }
+        }
+    }
+
+    if (!in_array($request->header('Mod-Identifier'), $availableModsIDs)){
+        $response = Response::make("false" , 200);
+        $response->header('Content-Type', 'text/plain');
+        return $response;
+    }
+    $responseContent = "true|" . $request->get('time') . "|" . $request->get('token');
+    $responseHash = hash('sha256', $secret . $responseContent . $secret);
+    $responseData = $responseHash . "|" . $responseContent;
+    $response = Response::make($responseData , 200);
+    $response->header('Content-Type', 'text/plain');
+    return $response;
+});
