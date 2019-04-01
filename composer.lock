@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "af5f3aac2126b88affac964de7efb237",
+    "content-hash": "cb938c8344549d18cbf79a11d3879154",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -908,6 +908,68 @@
                 "schedule"
             ],
             "time": "2018-06-06T03:12:17+00:00"
+        },
+        {
+            "name": "eduardoarandah/usermanager",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eduardoarandah/UserManager.git",
+                "reference": "eb1ac1afd79c0e83acd73f454b20d1f8dff12047"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eduardoarandah/UserManager/zipball/eb1ac1afd79c0e83acd73f454b20d1f8dff12047",
+                "reference": "eb1ac1afd79c0e83acd73f454b20d1f8dff12047",
+                "shasum": ""
+            },
+            "require": {
+                "backpack/crud": "^3.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "EduardoArandaH\\UserManager\\UserManagerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EduardoArandaH\\UserManager\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eduardo Aranda",
+                    "email": "eduardoarandah@gmail.com",
+                    "homepage": "https://eduardoarandah.github.io/"
+                }
+            ],
+            "description": "Users management interface for Laravel 5 using Backpack CRUD.",
+            "homepage": "https://github.com/eduardoarandah/UserManager",
+            "keywords": [
+                "Eduardo Aranda",
+                "User management",
+                "backpack",
+                "backpack user management",
+                "laravel backpack",
+                "laravel user management",
+                "manage users",
+                "users admin"
+            ],
+            "time": "2018-06-03T15:38:28+00:00"
         },
         {
             "name": "egulias/email-validator",

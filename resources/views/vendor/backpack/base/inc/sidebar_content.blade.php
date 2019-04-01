@@ -4,3 +4,4 @@
 <li><a href='{{ backpack_url('game') }}'><i class='fa fa-gamepad'></i> <span>Games</span></a></li>
 <li><a href='{{ backpack_url('loader') }}'><i class='fa fa-tag'></i> <span>Loaders</span></a></li>
 <li><a href='{{ backpack_url('bannedip') }}'><i class='fa fa-exclamation-circle'></i> <span>Banned IPs</span></a></li>
+<li><a href='{{ backpack_url('user') }}'><i class='fa fa-user'></i> <span>Users</span></a></li>
