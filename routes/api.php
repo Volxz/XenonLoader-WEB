@@ -129,9 +129,18 @@ Route::post('/loader/downloadmod', function (Request $request) {
 })->middleware(EncryptedLoaderAPI::class, XFAuth::class);
 
 Route::post('/mod/authenticate', function (Request $request) {
-    //TODO:Add date verification +1 day -1 day
-    $mod = Mod::find((int) $request->header("Mod-Identifier"));
 
+    $mod = Mod::find((int) $request->header("Mod-Identifier"));
+    $dateObj = DateTime::createFromFormat("Y-m-d", $request->get("time"));
+    $today = new DateTime(); // This object represents current date/time
+    $today->setTime( 0, 0, 0 );
+    $diff = $today->diff( $dateObj );
+    $diffDays = (integer)$diff->format( "%R%a" );
+    if($diffDays > 1 || $diffDays < -1){
+        $response = Response::make("false date ", 200);
+        $response->header('Content-Type', 'text/plain');
+        return $response;
+    }
     if(!$mod){
         $response = Response::make("false" , 200);
         $response->header('Content-Type', 'text/plain');
