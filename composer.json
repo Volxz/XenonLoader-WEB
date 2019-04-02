@@ -14,7 +14,8 @@
     "eduardoarandah/usermanager": "^1.0",
     "fideloper/proxy": "^4.0",
     "laravel/framework": "5.8.*",
-    "laravel/tinker": "^1.0"
+    "laravel/tinker": "^1.0",
+    "monicahq/laravel-cloudflare": "^1.1"
   },
   "require-dev": {
     "backpack/generators": "^1.2",

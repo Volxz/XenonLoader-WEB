@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb938c8344549d18cbf79a11d3879154",
+    "content-hash": "6866d28f9d539b38f2d7eee714934a13",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1809,6 +1809,66 @@
             ],
             "description": "An adapter decorator to enable meta-data caching.",
             "time": "2018-07-09T20:51:04+00:00"
+        },
+        {
+            "name": "monicahq/laravel-cloudflare",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/monicahq/laravel-cloudflare.git",
+                "reference": "52a26f7dd265c4c8e6b2e77162ab313f6694f685"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/monicahq/laravel-cloudflare/zipball/52a26f7dd265c4c8e6b2e77162ab313f6694f685",
+                "reference": "52a26f7dd265c4c8e6b2e77162ab313f6694f685",
+                "shasum": ""
+            },
+            "require": {
+                "fideloper/proxy": "~4.0",
+                "guzzlehttp/guzzle": "^6.3",
+                "illuminate/console": "^5.6",
+                "illuminate/http": "^5.6",
+                "illuminate/support": "^5.6"
+            },
+            "require-dev": {
+                "laravel/framework": "^5.6",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^3.8",
+                "phpunit/phpunit": "^7.4 || ^8.0",
+                "vimeo/psalm": "^2.0 || ^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Monicahq\\Cloudflare\\TrustedProxyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monicahq\\Cloudflare\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexis Saettler",
+                    "email": "alexis@saettler.org"
+                }
+            ],
+            "description": "Add Cloudflare ip addresses to trusted proxies for Laravel.",
+            "keywords": [
+                "cloudflare",
+                "laravel",
+                "php",
+                "proxies"
+            ],
+            "time": "2019-03-23T11:40:35+00:00"
         },
         {
             "name": "monolog/monolog",
