@@ -20,11 +20,10 @@ use Illuminate\Support\Facades\Storage;
 
 
 Route::post('/loader/checklogin', function (Request $request) {
+
     if (ipBlocked($request->ip())) {
         abort(429);
     }
-
-    //TODO: REQUIRE AND VERIFY HWID
     $request->validate([
         'username' => 'required',
         'password' => 'required',
@@ -39,7 +38,7 @@ Route::post('/loader/checklogin', function (Request $request) {
         $data['error'] = "User " . $username . " was not found.";
     } else {
         if ($user->checkPassword($request->get('password'))) {
-            if ($user->checkHWID($request->get('hwid')) || $request->get('hwid') == 'DEBUG') {
+            if ($user->checkHWID($request->get('hwid'))) {
                 $data['success'] = true;
             } else {
                 $data['success'] = false;
