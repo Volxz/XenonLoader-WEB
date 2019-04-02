@@ -21,7 +21,6 @@ class XFUser extends Model
         if ($hwidRow) {
             $currentHwid = $hwidRow->field_value;
             if (!$hwidRow->field_value) {
-                echo "NO CURRENT HWID";
                 DB::connection('mysql2')->table('xf_user_field_value')
                     ->where([
                         ['user_id', '=', $this->user_id],
