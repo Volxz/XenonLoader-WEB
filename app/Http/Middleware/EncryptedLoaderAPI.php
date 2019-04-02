@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Loader;
 use Closure;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Http\Request;
 class EncryptedLoaderAPI
 {
     /**
@@ -15,7 +15,7 @@ class EncryptedLoaderAPI
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if (!$request->has("data")) {
             abort(403);
