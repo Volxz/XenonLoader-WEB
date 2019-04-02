@@ -17,9 +17,9 @@ class EncryptedLoaderAPI
      */
     public function handle($request, Closure $next)
     {
-        //if (!$request->has("data")) {
-        //    abort(403);
-        //}
+        if (!$request->has("data")) {
+            abort(403);
+        }
         $version = $request->header('loader_version');
         $loader = Loader::where('version', '=', $version)->get()->first();
 
