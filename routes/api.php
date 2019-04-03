@@ -103,7 +103,7 @@ Route::post('/loader/modlist', function (Request $request) {
 })->middleware(EncryptedLoaderAPI::class, XFAuth::class);
 
 Route::post('/loader/downloadmod', function (Request $request) {
-    $chosenMod = Mod::find($request->get('mod_id'))->first();
+    $chosenMod = Mod::find($request->get('mod_id'));
     if (!$chosenMod)
         abort(404);
     $xfUser = XFUser::where('username', '=', $request->get('username'))->with('xfgroups.mods.game', 'xfgroups.games.mods')->get()->first();
